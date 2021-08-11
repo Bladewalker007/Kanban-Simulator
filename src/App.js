@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { KanbanCompleted, KanbanInProgress, KanbanReady } from './components/KanbanFlow';
+import { TaskForm } from './components/TaskForm';
 
 function App() {
+  const [taskList, setTaskList] = useState([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="kanbanNav">
+        <p>Kanban Workflow Simulator</p>
+      </div>
+      <div className="kanbanForm">
+        <TaskForm setTaskList={setTaskList} taskList={taskList}/>
+      </div>
+      <div className="kanbanBacklogs">
+        <KanbanReady taskList={taskList} setTaskList={setTaskList} />
+        <KanbanInProgress taskList={taskList} setTaskList={setTaskList} />
+        <KanbanCompleted taskList={taskList} setTaskList={setTaskList} />
+      </div>
     </div>
   );
 }
